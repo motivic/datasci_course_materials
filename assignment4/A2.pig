@@ -28,7 +28,9 @@ store count_by_subject_ordered into '/user/hadoop/A2-results/x_axis' using PigSt
 -- store count_by_object_ordered into 's3n://superman/A2-results';
 
 -- y-axis
-count_by_count = foreach count generate flatten($0), COUNT($1) as yvalue PARALLEL 50;
+counts = group count_by_subject_ordered by (count) PARALLEL 50;
+
+count_by_count = foreach counts generate flatten($0), COUNT($1) as yvalue PARALLEL 50;
 
 count_by_count_ordered = order count_by_count by (yvalue) PARALLEL 50;
 
