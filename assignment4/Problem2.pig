@@ -34,5 +34,5 @@ count_by_count = foreach counts generate flatten($0), COUNT($1) as yvalue PARALL
 
 count_by_count_ordered = order count_by_count by (yvalue) PARALLEL 50;
 
-store count_by_count_ordered into '/user/hadoop/A2-results/y_axis' using PigStorage(); 
+store count_by_count_ordered into '/user/hadoop/4-results/y_axis' using PigStorage(); 
 
